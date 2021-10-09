@@ -1,50 +1,52 @@
 <!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Flood Fill</title>
+<html lang="en">
 
-        <style>
-            #gameboard {
-                display: flex;
-            }
-            #instructions {
-                max-width: 300px;
-                margin: 10px;
-            }
-            #score {
-                font-weight: bold;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Flood Fill</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="game-wrapper">
+        <h1 class="game--title">Tic Tac Toe</h1>
         <div id="gameboard">
-            <canvas width="600" height="400"></canvas>
-            <div id="instructions">
-                <h2>How to play</h2>
-                <p><strong>Goal: </strong>Make all cells on the grid/board the same color.</p>
-                <ul>
-                    <li>Choose a color by clicking on one of the labeled buttons at bottom of the grid.</li>
-                    <li>Click on a cell to change its color to the selected color.</li>
-                    <li>All neighbouring cells of the clicked-on cell's color will be changed to the selected color.</li>
-                </ul>
+            <div class="game--container">
+                <div data-cell-index="0" class="cell"></div>
+                <div data-cell-index="1" class="cell"></div>
+                <div data-cell-index="2" class="cell"></div>
+                <div data-cell-index="3" class="cell"></div>
+                <div data-cell-index="4" class="cell"></div>
+                <div data-cell-index="5" class="cell"></div>
+                <div data-cell-index="6" class="cell"></div>
+                <div data-cell-index="7" class="cell"></div>
+                <div data-cell-index="8" class="cell"></div>
             </div>
+            <h2 id="game--status" class="game--status"></h2>
+            <button id="game--restart" class="game--restart">Restart Game</button>
         </div>
         </div>
-        <div id="ui">
-            <button id="restart">Restart</button>
-            <button id="undo">Undo</button>
-            <button id="rotate">Rotate</button>
-            <button name="red" class="color-select">Red</button>
-            <button name="green" class="color-select">Green</button>
-            <button name="blue" class="color-select">Blue</button>
-            <button name="white" class="color-select">White</button>
-            <button name="black" class="color-select">Black</button>
-            <div id="score">
-                <p>Score: <span id="score-text"></span></p>
-            </div>
-        </div>
-        <script src="floodfill.js"></script>
-    </body>
+    </section>
+    <div id="instructions">
+        <h2>How to play</h2>
+        <ul>
+            <li>The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. </li>
+            <li>The first player is known as X and the second is O.</li>
+            <li>Players alternate placing Xs and Os on the game board until either oppent has three in a row or all nine
+                squares are filled.
+            </li>
+            <li>X always goes first, and in the event that no one has three in a row, the stalemate is called a cat
+                game.</li>
+        </ul>
+    </div>
+    <div id="result">
+        <h2>Playing Result</h2>
+        <div id="result--player-X" class="mb-2">Player X win a times</div>
+        <div id="result--player-O" class="mb-2">Player O win b times</div>
+        <div id="result--draw" class="mb-2">2 players draw c times</div>
+        <button id="result-reset" class="btn">Reset Data</button>
+    </div>
+    <script src="tictactoe.js"></script>
+</body>
+
 </html>
