@@ -11,6 +11,7 @@
     [0, 4, 8],
     [2, 4, 6],
   ];
+  //  result of 2 players
   let dataFromStorage = JSON.parse(localStorage.getItem("winData"));
   const statusDisplay = document.querySelector("#game--status");
   const resultXDisplay = document.querySelector("#result--player-X");
