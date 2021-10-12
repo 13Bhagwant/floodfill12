@@ -1,9 +1,9 @@
 {
-  "name": "floodfill12",
+  "name": "my-project",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/13Bhagwant/floodfill12.git",
-  "author": "tutv3 <tutv3@smartosc.com>",
+  "repository": "",
+  "author": "",
   "license": "MIT",
   "scripts": {
     "dev": "lite-server"
@@ -17,5 +17,6 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0"
-  }
+  },
+  "description": "Tic tac toe game get an idea from https://playtictactoe.org. Thank you for this amazing site"
 }

@@ -13,7 +13,8 @@ module.exports = {
   rules: {
     quotes: [2, "double"],
     "comma-dangle": "off",
-    beforeStatementContinuationChars: "off",
     semi: "always",
+    indent: ["error", 2],
   },
+  plugins: ["html"],
 };

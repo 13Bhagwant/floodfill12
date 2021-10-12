@@ -1,7 +1,13 @@
 <!-- @format -->
 
-## Project setup
+## Project installer
 
-1. Make sure to download Nodejs(https://nodejs.org/en/) runtime on your machine.
-2. `run yarn install` or `npm install` to download node_modules and related packages
-3. run on your project terminal : `yarn dev` or `npm run dev` and open your browser to see the result
+0. Clone this repository by `git clone ...`
+
+1. Download Nodejs(https://nodejs.org/en/) runtime.
+
+2. `run yarn install`
+
+3. Run on terminal editor : `yarn dev`
+
+4. Watch our project on browser

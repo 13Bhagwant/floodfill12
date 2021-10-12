@@ -1,52 +1,221 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      body {
+        margin: 0;
+        background-color: #000;
+        color: #fff;
+        font-family: sans-serif;
+        text-size-adjust: 100%;
+        padding: 2rem;
+      }
+      .game {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      .board {
+        width: 450px;
+        height: 450px;
+      }
+      .board.end {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      .square {
+        float: left;
+        width: 33.333333333%;
+        height: 33.333333333%;
+        border-width: 5px;
+        border-color: #fff;
+        transition: background-color 0.1s;
+        cursor: pointer;
+      }
+      .square:focus {
+        outline: 0;
+        background-color: #212121;
+      }
+      .square.top {
+        border-bottom-style: solid;
+      }
+      .square.bottom {
+        border-top-style: solid;
+      }
+      .square.left {
+        clear: both;
+        border-right-style: solid;
+      }
+      .square.right {
+        border-left-style: solid;
+      }
+      .square.right > div {
+        margin-left: -5px;
+      }
+      .square.bottom > div {
+        margin-top: -5px;
+      }
+      .board.tie .square {
+        animation: border-blink 0.3s steps(1) 3;
+      }
+      .board .square > div {
+        transition: opacity 0.1s;
+      }
+      .o {
+        left: 16.666666667%;
+        top: 16.666666667%;
+        width: 66.666666667%;
+        height: 66.666666667%;
+        border-radius: 50%;
+        border: 10px solid #fff;
+      }
+      .x {
+        width: 100%;
+        height: 100%;
+      }
+      .square .x,
+      .square .o {
+        position: relative;
+        user-select: none;
+        pointer-events: none;
+      }
+      .x:before {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        content: "X";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 6rem;
+        font-weight: 500;
+      }
+      .scores {
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .scores p {
+        font: 20px "Raleway", sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: 1;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        transform: translate3d(0, 0, 0);
+      }
+      .scores .score {
+        font-size: 40px;
+        display: block;
+        padding: 10px 0 0 0;
+        transform: translate3d(0, 0, 0);
+      }
+      .player1,
+      .player2 {
+        width: 250px;
+      }
+      .scores .turn {
+        opacity: 0.5;
+      }
+      .btn-restart {
+        position: fixed;
+        right: 20px;
+        top: 45%;
+        padding: 8px 1rem;
+        border-radius: 0;
+        border: 1px solid #999;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+      }
+      .btn-restart.show {
+        opacity: 1;
+      }
+      .noti {
+        position: fixed;
+        z-index: 50;
+        top: 20px;
+        left: 20px;
+        padding: 10px;
+        opacity: 1;
+        transition: 0.3s ease-in-out;
+        transform: translateY(-300px);
+        max-width: 250px;
+        background: #adebfc;
+        color: #2e6c7d;
+      }
+      .noti.show {
+        transform: translateY(0);
+      }
+      @media (max-width: 500px) {
+        .square {
+          height: 20%;
+        }
+        .scrores {
+          margin-top: 2rem;
+        }
+        .board {
+          height: 400px;
+          width: 250px;
+        }
+        .scores p {
+          font-size: 16px;
+        }
+        .o {
+          border: 5px solid #fff;
+        }
+        .x:before {
+          font-size: 3rem;
+          font-weight: 400;
+        }
+      }
+    </style>
+  </head>
 
-<body>
-    <section class="game-wrapper">
-        <h1 class="game--title">Tic Tac Toe</h1>
-        <div id="gameboard">
-            <div class="game--container">
-                <div data-cell-index="0" class="cell"></div>
-                <div data-cell-index="1" class="cell"></div>
-                <div data-cell-index="2" class="cell"></div>
-                <div data-cell-index="3" class="cell"></div>
-                <div data-cell-index="4" class="cell"></div>
-                <div data-cell-index="5" class="cell"></div>
-                <div data-cell-index="6" class="cell"></div>
-                <div data-cell-index="7" class="cell"></div>
-                <div data-cell-index="8" class="cell"></div>
-            </div>
-            <h2 id="game--status" class="game--status"></h2>
-            <button id="game--restart" class="game--restart">Restart Game</button>
-        </div>
-        </div>
-    </section>
-    <div id="instructions">
-        <h2>How to play</h2>
-        <ul>
-            <li>The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. </li>
-            <li>The first player is known as X and the second is O.</li>
-            <li>Players alternate placing Xs and Os on the game board until either oppent has three in a row or all nine
-                squares are filled.
-            </li>
-            <li>X always goes first, and in the event that no one has three in a row, the stalemate is called a cat
-                game.</li>
-        </ul>
+  <body>
+    <div class="noti">Player X Win the game</div>
+    <div class="game">
+      <div class="board">
+        <div class="square top left" tabindex="0"><div class=""></div></div>
+        <div class="square top" tabindex="0"><div class=""></div></div>
+        <div class="square top right" tabindex="0"><div class=""></div></div>
+        <div class="square left" tabindex="0"><div class=""></div></div>
+        <div class="square" tabindex="0"><div class=""></div></div>
+        <div class="square right" tabindex="0"><div class=""></div></div>
+        <div class="square bottom left" tabindex="0"><div class=""></div></div>
+        <div class="square bottom" tabindex="0"><div class=""></div></div>
+        <div class="square bottom right" tabindex="0"><div class=""></div></div>
+      </div>
+      <button class="btn-restart">Continue</button>
     </div>
-    <div id="result">
-        <h2>Player Result</h2>
-        <div id="result--player-X" class="mb-2">Player X win a times</div>
-        <div id="result--player-O" class="mb-2">Player O win b times</div>
-        <div id="result--draw" class="mb-2">2 players draw c times</div>
-        <button id="result-reset" class="btn">Reset Data</button>
+    <div class="scores p1">
+      <p class="player1">
+        <span class="p1">Player</span>(X)<span class="score">0</span>
+      </p>
+      <p class="ties">Tie<span class="score">0</span></p>
+      <p class="player2">
+        <span class="p1">Player</span>(O)<span class="score">0</span>
+      </p>
     </div>
-    <script src="tictactoe.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
